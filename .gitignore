@@ -1,0 +1,69 @@
+# Dependencies
+node_modules
+/.pnp
+.pnp.js
+
+# Production
+/dist
+/build
+
+# Development
+.DS_Store
+*.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+/coverage
+
+# Misc
+.cache
+.parcel-cache
+.nyc_output
+.grunt
+.lock-wscript
+.node_repl_history
+.yarn-integrity
+.eslintcache
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# dotenv environment variables file
+.env.test
+
+# Temporary folders
+tmp/
+temp/
