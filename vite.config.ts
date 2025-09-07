@@ -2,11 +2,12 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 
-// https://vitejs.dev/config/
+// Import the esbuild plugin to polyfill Node globals like Buffer
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+
 export default defineConfig({
   plugins: [react()],
-  
-  // Path resolution for cleaner imports
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -18,10 +19,26 @@ export default defineConfig({
       '@/styles': path.resolve(__dirname, 'src/styles'),
       '@/data': path.resolve(__dirname, 'src/data'),
       '@/context': path.resolve(__dirname, 'src/context'),
+
+      // Add this alias so 'buffer' resolves to the buffer npm package
+      buffer: 'buffer',
     },
   },
 
-  // CSS configuration
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: 'globalThis',
+      },
+      plugins: [
+        // Enable Buffer polyfill for esbuild
+        NodeGlobalsPolyfillPlugin({
+          buffer: true,
+        }),
+      ],
+    },
+  },
+
   css: {
     preprocessorOptions: {
       scss: {
@@ -32,52 +49,41 @@ export default defineConfig({
       },
     },
     modules: {
-      // CSS Modules configuration
       localsConvention: 'camelCase',
       generateScopedName: '[name]__[local]___[hash:base64:5]',
     },
   },
 
-  // Build optimization
   build: {
-    // Generate sourcemaps for production debugging
     sourcemap: true,
-    
-    // Optimize chunks
     rollupOptions: {
       output: {
         manualChunks: {
-          // Separate vendor chunks
           vendor: ['react', 'react-dom', 'react-router-dom'],
           utils: ['date-fns', 'clsx'],
         },
       },
     },
-    
-    // Minify options
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Remove console.log in production
+        drop_console: true,
         drop_debugger: true,
       },
     },
   },
 
-  // Development server configuration
   server: {
     port: 3000,
-    open: true, // Open browser automatically
-    host: true, // Allow access from network
+    open: true,
+    host: true,
   },
 
-  // Preview server configuration
   preview: {
     port: 3000,
     open: true,
   },
 
-  // Define environment variables
   define: {
     __DEV__: JSON.stringify(process.env.NODE_ENV === 'development'),
   },

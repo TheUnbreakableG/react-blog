@@ -1,0 +1,54 @@
+.list {
+  padding: 1.5rem 1rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.post {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid $color-gray-300; // Use a neutral border color from your variables
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  background: $color-white; // Background should likely be white or light, not $color-primary (which is blue)
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+  }
+
+  h2 {
+    margin: 0 0 0.6rem;
+    color: $color-primary; // blue for headings, matches your primary color
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      color: darken($color-primary, 10%);
+    }
+  }
+
+  p {
+    margin: 0 0 0.75rem;
+    color: $color-gray-700; // Use neutral darker text color
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  small {
+    color: $color-gray-500; // muted text color
+    font-size: 0.85rem;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap; // wrap for smaller screens
+}

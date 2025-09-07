@@ -1,34 +1,18 @@
-/**
- * Main App component
- * Handles routing, global layout, and error boundaries
- */
-
 import React, { Suspense } from 'react';
-// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-// // Import components
-// import Header from '@/components/common/Header';
-// import Footer from '@/components/common/Footer';
-// import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Header from '@/components/common/Header.tsx';
+import Footer from '@/components/common/Footer.tsx';
+import LoadingFallback from '@/components/common/LoadingFallback.tsx';
 
-// // Import pages (using lazy loading for better performance)
-// const Home = React.lazy(() => import('@/pages/Home'));
-// const BlogList = React.lazy(() => import('@/pages/BlogList'));
-// const BlogPost = React.lazy(() => import('@/pages/BlogPost'));
-// const About = React.lazy(() => import('@/pages/About'));
-// const Contact = React.lazy(() => import('@/pages/Contact'));
-// const Search = React.lazy(() => import('@/pages/Search'));
-// const Category = React.lazy(() => import('@/pages/Category'));
-// const Author = React.lazy(() => import('@/pages/Author'));
-// const NotFound = React.lazy(() => import('@/pages/NotFound'));
+const Home = React.lazy(() => import('@/pages/Home'));
+const BlogList = React.lazy(() => import('@/pages/BlogList'));
+const BlogPost = React.lazy(() => import('@/pages/BlogPost'));
+const About = React.lazy(() => import('@/pages/About'));
+const Contact = React.lazy(() => import('@/pages/Contact'));
+const Search = React.lazy(() => import('@/pages/Search'));
+const NotFound = React.lazy(() => import('@/pages/NotFound'));
 
-// TODO: Import styles when created
-// import './App.scss';
-
-/**
- * Error Boundary Component
- * Catches JavaScript errors anywhere in the child component tree
- */
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; error?: Error }
@@ -68,49 +52,27 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-/**
- * Loading Fallback Component (temporary simple version)
- */
-const LoadingFallback: React.FC = () => (
-  <div className="loading-fallback">
-    <div>Loading...</div>
-  </div>
-);
-
-/**
- * Main App Component (temporary simple version)
- */
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <div className="app">
-        {/* TODO: Add Header when component is created */}
-        {/* <Header /> */}
+        <Header />
 
-        {/* Main content area */}
         <main className="main-content" role="main">
-          <div style={{ padding: '2rem', textAlign: 'center' }}>
-            <h1>React Blog</h1>
-            <p>Blog is being built step by step...</p>
-            {/* TODO: Add routes when pages are created */}
-            {/* <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/blog" element={<BlogList />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                <Route path="/category/:slug" element={<Category />} />
-                <Route path="/author/:slug" element={<Author />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense> */}
-          </div>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<BlogList />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </main>
 
-        {/* TODO: Add Footer when component is created */}
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </ErrorBoundary>
   );
