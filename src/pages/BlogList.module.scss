@@ -1,54 +1,105 @@
+@import '@/styles/variables.scss';
+
+.intro {
+  max-width: $container-md;
+  margin: 0 auto $spacing-8;
+  text-align: center;
+
+  h1 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-extrabold;
+    margin-bottom: $spacing-3;
+    color: $color-primary;
+  }
+
+  .introText {
+    font-size: $font-size-lg;
+    color: $color-gray-700;
+    line-height: $line-height-relaxed;
+  }
+}
+
 .list {
-  padding: 1.5rem 1rem;
-  max-width: 720px;
+  padding: $spacing-12 $spacing-4;
+  max-width: $container-4xl;
   margin: 0 auto;
 }
 
 .post {
-  padding: 1.25rem 1.5rem;
-  border: 1px solid $color-gray-300; // Use a neutral border color from your variables
-  border-radius: 10px;
-  margin-bottom: 1.25rem;
-  background: $color-white; // Background should likely be white or light, not $color-primary (which is blue)
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  background-color: $color-white;
+  border: 1px solid $color-gray-200;
+  border-radius: $border-radius-lg;
+  padding: $spacing-6;
+  margin-bottom: $spacing-8;
+  box-shadow: $shadow-sm;
+  transition: $transition-all;
 
   &:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    transform: translateY(-3px);
+    box-shadow: $shadow-lg;
+    transform: translateY(-4px);
   }
 
   h2 {
-    margin: 0 0 0.6rem;
-    color: $color-primary; // blue for headings, matches your primary color
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1.4rem;
-    transition: color 0.3s ease;
+    margin: 0 0 $spacing-4;
+    color: $color-primary;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    text-align: center;
+    transition: $transition-colors;
 
-    &:hover {
-      text-decoration: underline;
-      color: darken($color-primary, 10%);
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        color: $color-primary-dark;
+      }
     }
   }
 
   p {
-    margin: 0 0 0.75rem;
-    color: $color-gray-700; // Use neutral darker text color
-    font-size: 1rem;
-    line-height: 1.5;
+    max-width: 90%;
+    margin: 0 auto $spacing-4;
+    color: $color-gray-700;
+    font-size: $font-size-lg;
+    line-height: $line-height-relaxed;
+    text-align: center;
   }
 
   small {
-    color: $color-gray-500; // muted text color
-    font-size: 0.85rem;
+    display: block;
+    text-align: center;
+    color: $color-gray-500;
+    font-size: $font-size-sm;
+  }
+
+  .readMore {
+    display: flex;
+    justify-content: center;
+    margin-top: $spacing-4;
+
+    a {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-secondary;
+      text-decoration: none;
+      transition: $transition-colors;
+
+      &:hover {
+        color: $color-secondary-dark;
+        text-decoration: underline;
+      }
+    }
   }
 }
 
 .pagination {
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
-  margin-top: 2.5rem;
-  flex-wrap: wrap; // wrap for smaller screens
+  align-items: center;
+  gap: $spacing-3;
+  margin-top: $spacing-10;
+  flex-wrap: wrap;
 }

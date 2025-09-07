@@ -27,32 +27,39 @@ const BlogList: React.FC = () => {
         <meta name="description" content="Browse all blog posts on React Blog." />
       </Helmet>
 
-      <section aria-labelledby="blog-list-heading">
+      <section aria-labelledby="blog-list-heading" className={styles.intro}>
         <h1 id="blog-list-heading">All Blog Posts</h1>
+        <p className={styles.introText}>
+            Explore recipes, stories, and insights from our latest posts—all in one place.
+        </p>
 
-        <ul>
-          {currentPosts.map(post => (
-            <li key={post.slug}>
-              <Link to={`/blog/${post.slug}`}>
-                <h2>{post.title}</h2>
-              </Link>
-              <p>{post.description}</p>
-              <small>
-                <time dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
-              </small>
-            </li>
-          ))}
+        <ul className={styles.list}>
+            {currentPosts.map(post => (
+                <li key={post.slug} className={styles.post}>
+                <h2>
+                    <Link to={`/blog/${post.slug}`}>
+                    {post.title}
+                    </Link>
+                </h2>
+                <p>{post.description}</p>
+                <small>
+                    <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                    })}
+                    </time>
+                </small>
+                <div className={styles.readMore}>
+                    <Link to={`/blog/${post.slug}`}>Read more →</Link>
+                </div>
+                </li>
+            ))}
         </ul>
 
         <nav
           aria-label="Pagination" className={styles.pagination}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem' }}
         >
           <Button
             onClick={handlePrev}

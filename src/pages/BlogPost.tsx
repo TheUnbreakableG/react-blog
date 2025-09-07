@@ -50,7 +50,7 @@ const BlogPost: React.FC = () => {
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </section>
 
-        <nav aria-label="Post navigation" style={{ marginTop: '2rem' }}>
+        <nav aria-label="Post navigation">
           <Link to="/blog" className="back-link" style={{ textDecoration: 'none' }}>
             <Button variant="secondary">← Back to all posts</Button>
           </Link>
