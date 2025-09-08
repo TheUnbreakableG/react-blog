@@ -1,0 +1,104 @@
+{
+  "authors": [
+    {
+      "id": "john-doe",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "avatar": "/images/authors/john-doe.jpg",
+      "bio": "Senior Frontend Developer with 8+ years of experience in React and TypeScript. Passionate about clean code and developer experience.",
+      "social": {
+        "twitter": "johndoe",
+        "github": "johndoe",
+        "linkedin": "johndoe",
+        "website": "https://johndoe.dev"
+      },
+      "slug": "john-doe",
+      "postCount": 12,
+      "joinedAt": "2024-01-15T00:00:00Z"
+    },
+    {
+      "id": "sarah-williams",
+      "name": "Sarah Williams",
+      "email": "sarah.williams@example.com",
+      "avatar": "/images/authors/sarah-williams.jpg",
+      "bio": "Full-stack developer specializing in Next.js and modern web applications. Loves sharing knowledge through technical writing.",
+      "social": {
+        "twitter": "sarahwill",
+        "github": "sarahwill",
+        "linkedin": "sarahwilliams",
+        "website": "https://sarahwilliams.dev"
+      },
+      "slug": "sarah-williams",
+      "postCount": 8,
+      "joinedAt": "2024-03-22T00:00:00Z"
+    },
+    {
+      "id": "mike-chen",
+      "name": "Mike Chen",
+      "email": "mike.chen@example.com",
+      "avatar": "/images/authors/mike-chen.jpg",
+      "bio": "CSS enthusiast and UI/UX designer. Focuses on creating beautiful, accessible, and performant user interfaces.",
+      "social": {
+        "twitter": "mikechen",
+        "github": "mikechen",
+        "linkedin": "mikechen",
+        "website": "https://mikechen.design"
+      },
+      "slug": "mike-chen",
+      "postCount": 5,
+      "joinedAt": "2024-05-10T00:00:00Z"
+    },
+    {
+      "id": "lisa-rodriguez",
+      "name": "Lisa Rodriguez",
+      "email": "lisa.rodriguez@example.com",
+      "avatar": "/images/authors/lisa-rodriguez.jpg",
+      "bio": "Software architect with expertise in React state management and scalable application design. Conference speaker and mentor.",
+      "social": {
+        "twitter": "lisarod",
+        "github": "lisarod",
+        "linkedin": "lisarodriguez",
+        "website": "https://lisarodriguez.dev"
+      },
+      "slug": "lisa-rodriguez",
+      "postCount": 7,
+      "joinedAt": "2024-02-08T00:00:00Z"
+    },
+    {
+      "id": "david-kim",
+      "name": "David Kim",
+      "email": "david.kim@example.com",
+      "avatar": "/images/authors/david-kim.jpg",
+      "bio": "Performance engineer focused on React optimization and web vitals. Believes in building fast, efficient web applications.",
+      "social": {
+        "twitter": "davidkim",
+        "github": "davidkim",
+        "linkedin": "davidkim",
+        "website": "https://davidkim.dev"
+      },
+      "slug": "david-kim",
+      "postCount": 6,
+      "joinedAt": "2024-04-18T00:00:00Z"
+    },
+    {
+      "id": "emma-wilson",
+      "name": "Emma Wilson",
+      "email": "emma.wilson@example.com",
+      "avatar": "/images/authors/emma-wilson.jpg",
+      "bio": "Accessibility advocate and frontend developer. Dedicated to creating inclusive web experiences for all users.",
+      "social": {
+        "twitter": "emmawilson",
+        "github": "emmawilson",
+        "linkedin": "emmawilson",
+        "website": "https://emmawilson.dev"
+      },
+      "slug": "emma-wilson",
+      "postCount": 4,
+      "joinedAt": "2024-06-05T00:00:00Z"
+    }
+  ],
+  "meta": {
+    "totalAuthors": 6,
+    "lastUpdated": "2025-09-12T16:00:00Z"
+  }
+}

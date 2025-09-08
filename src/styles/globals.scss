@@ -1,0 +1,470 @@
+@use '@styles/_variables' as vars;
+
+
+/**
+ * Global Styles & CSS Reset
+ * This file contains global styles, CSS reset, and base element styling
+ * that applies across the entire application.
+ */
+
+
+/* ==========================================================================
+   CSS RESET & NORMALIZATION
+   ========================================================================== */
+
+/**
+ * Modern CSS Reset (based on Josh Comeau's reset)
+ * https://www.joshwcomeau.com/css/custom-css-reset/
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // Smooth scrolling for better UX
+  scroll-behavior: smooth;
+}
+
+body {
+  // Improved text rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  // Prevent horizontal scroll
+  overflow-x: hidden;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   BASE TYPOGRAPHY
+   ========================================================================== */
+
+/**
+ * Base typography styles using the defined font variables
+ * Ensures consistent text rendering across the application
+ */
+
+html {
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+}
+
+body {
+  font-family: $font-primary;
+  font-weight: $font-weight-normal;
+  color: map-get($light-theme, 'text-primary');
+  background-color: map-get($light-theme, 'bg-primary');
+  transition: $transition-colors;
+}
+
+// Headings with proper hierarchy and spacing
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-secondary;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-4;
+  color: map-get($light-theme, 'text-primary');
+}
+
+h1 {
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-6;
+}
+
+h2 {
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-5;
+}
+
+h3 {
+  font-size: $font-size-2xl;
+  margin-bottom: $spacing-4;
+}
+
+h4 {
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-3;
+}
+
+h5 {
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-2;
+}
+
+h6 {
+  font-size: $font-size-base;
+  margin-bottom: $spacing-2;
+}
+
+// Paragraph styling
+p {
+  margin-bottom: $spacing-4;
+  line-height: $line-height-relaxed;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links with proper hover states
+a {
+  color: map-get($light-theme, 'link');
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: map-get($light-theme, 'link-hover');
+  }
+  
+  &:focus-visible {
+    outline: 2px solid map-get($light-theme, 'border-focus');
+    outline-offset: 2px;
+  }
+}
+
+// Lists
+ul, ol {
+  margin-bottom: $spacing-4;
+  padding-left: $spacing-6;
+  
+  li {
+    margin-bottom: $spacing-2;
+    line-height: $line-height-relaxed;
+  }
+}
+
+// Code blocks and inline code
+code {
+  font-family: $font-mono;
+  font-size: $font-size-sm;
+  background-color: map-get($light-theme, 'bg-tertiary');
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius;
+  border: 1px solid map-get($light-theme, 'border-primary');
+}
+
+pre {
+  background-color: map-get($light-theme, 'bg-tertiary');
+  padding: $spacing-4;
+  border-radius: $border-radius-md;
+  border: 1px solid map-get($light-theme, 'border-primary');
+  overflow-x: auto;
+  margin-bottom: $spacing-4;
+  
+  code {
+    background: none;
+    padding: 0;
+    border: none;
+    font-size: $font-size-sm;
+  }
+}
+
+/* ==========================================================================
+   LAYOUT & CONTAINERS
+   ========================================================================== */
+
+/**
+ * Container system for consistent layout spacing
+ * Uses the defined container sizes from variables
+ */
+
+.container {
+  width: 100%;
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 0 $spacing-4;
+  
+  @include breakpoint(md) {
+    padding: 0 $spacing-6;
+  }
+  
+  @include breakpoint(lg) {
+    padding: 0 $spacing-8;
+  }
+}
+
+.container-wide {
+  max-width: $content-width-wide;
+}
+
+.container-full {
+  max-width: $content-width-full;
+}
+
+// Section spacing
+section {
+  padding: $spacing-8 0;
+  
+  @include breakpoint(md) {
+    padding: $spacing-12 0;
+  }
+  
+  @include breakpoint(lg) {
+    padding: $spacing-16 0;
+  }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/**
+ * Reusable utility classes for common styling patterns
+ * These follow a functional CSS approach for maximum reusability
+ */
+
+// Text utilities
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-xs { font-size: $font-size-xs; }
+.text-sm { font-size: $font-size-sm; }
+.text-base { font-size: $font-size-base; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }
+.text-2xl { font-size: $font-size-2xl; }
+.text-3xl { font-size: $font-size-3xl; }
+.text-4xl { font-size: $font-size-4xl; }
+
+.font-light { font-weight: $font-weight-light; }
+.font-normal { font-weight: $font-weight-normal; }
+.font-medium { font-weight: $font-weight-medium; }
+.font-semibold { font-weight: $font-weight-semibold; }
+.font-bold { font-weight: $font-weight-bold; }
+
+// Spacing utilities
+.m-0 { margin: $spacing-0; }
+.m-1 { margin: $spacing-1; }
+.m-2 { margin: $spacing-2; }
+.m-3 { margin: $spacing-3; }
+.m-4 { margin: $spacing-4; }
+.m-5 { margin: $spacing-5; }
+.m-6 { margin: $spacing-6; }
+.m-8 { margin: $spacing-8; }
+
+.mt-0 { margin-top: $spacing-0; }
+.mt-1 { margin-top: $spacing-1; }
+.mt-2 { margin-top: $spacing-2; }
+.mt-3 { margin-top: $spacing-3; }
+.mt-4 { margin-top: $spacing-4; }
+.mt-5 { margin-top: $spacing-5; }
+.mt-6 { margin-top: $spacing-6; }
+.mt-8 { margin-top: $spacing-8; }
+
+.mb-0 { margin-bottom: $spacing-0; }
+.mb-1 { margin-bottom: $spacing-1; }
+.mb-2 { margin-bottom: $spacing-2; }
+.mb-3 { margin-bottom: $spacing-3; }
+.mb-4 { margin-bottom: $spacing-4; }
+.mb-5 { margin-bottom: $spacing-5; }
+.mb-6 { margin-bottom: $spacing-6; }
+.mb-8 { margin-bottom: $spacing-8; }
+
+.p-0 { padding: $spacing-0; }
+.p-1 { padding: $spacing-1; }
+.p-2 { padding: $spacing-2; }
+.p-3 { padding: $spacing-3; }
+.p-4 { padding: $spacing-4; }
+.p-5 { padding: $spacing-5; }
+.p-6 { padding: $spacing-6; }
+.p-8 { padding: $spacing-8; }
+
+// Display utilities
+.hidden { display: none; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.flex { display: flex; }
+.grid { display: grid; }
+
+// Flex utilities
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+
+// Visibility utilities
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   DARK THEME
+   ========================================================================== */
+
+/**
+ * Dark theme styles that override light theme colors
+ * Uses CSS custom properties for dynamic theme switching
+ */
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  
+  body {
+    color: map-get($dark-theme, 'text-primary');
+    background-color: map-get($dark-theme, 'bg-primary');
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: map-get($dark-theme, 'text-primary');
+  }
+  
+  a {
+    color: map-get($dark-theme, 'link');
+    
+    &:hover {
+      color: map-get($dark-theme, 'link-hover');
+    }
+  }
+  
+  code {
+    background-color: map-get($dark-theme, 'bg-tertiary');
+    border-color: map-get($dark-theme, 'border-primary');
+  }
+  
+  pre {
+    background-color: map-get($dark-theme, 'bg-tertiary');
+    border-color: map-get($dark-theme, 'border-primary');
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+/**
+ * Accessibility improvements and focus management
+ * Ensures the application is usable for all users
+ */
+
+// Focus styles for keyboard navigation
+:focus-visible {
+  outline: 2px solid map-get($light-theme, 'border-focus');
+  outline-offset: 2px;
+  border-radius: $border-radius;
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  :root {
+    --border-primary: var(--color-gray-900);
+    --border-secondary: var(--color-gray-800);
+  }
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+/**
+ * Print-specific styles for better printing experience
+ * Hides unnecessary elements and optimizes layout for paper
+ */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a, a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  // Don't show links for images, or javascript/internal links
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+  
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr, img {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  @page {
+    margin: 0.5in;
+  }
+  
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  h2, h3 {
+    page-break-after: avoid;
+  }
+}

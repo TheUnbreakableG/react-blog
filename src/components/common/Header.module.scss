@@ -1,30 +1,52 @@
+@use '@styles/_variables' as vars;
+
+
 .header {
-  background-color: #24292e;
-  color: white;
-  padding: 0.75rem 1rem;
+  background-color: map-get($light-theme, 'bg-elevated');
+  color: map-get($light-theme, 'text-primary');
+  padding: $spacing-4 $spacing-6;
   position: sticky;
   top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); // slightly stronger shadow
+  z-index: $z-index-sticky;
+  box-shadow: $shadow-sm;
+  border-bottom: 1px solid map-get($light-theme, 'border-primary');
+  transition: $transition-colors;
+
+  // Dark theme styles
+  [data-theme='dark'] & {
+    background-color: map-get($dark-theme, 'bg-elevated');
+    color: map-get($dark-theme, 'text-primary');
+    border-bottom-color: map-get($dark-theme, 'border-primary');
+  }
 
   .container {
-    max-width: 1024px;
+    max-width: $content-width;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: $spacing-6;
   }
 
   .logo {
-    font-weight: 800;
-    font-size: 1.75rem; // slightly bigger for emphasis
-    color: white;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-2xl;
+    color: map-get($light-theme, 'text-primary');
     text-decoration: none;
-    letter-spacing: 0.05em; // a bit of spacing for style
-    transition: color 0.3s ease;
+    letter-spacing: -0.025em;
+    transition: color $transition-fast;
 
     &:hover {
-      color: #58a6ff; // subtle blue highlight on hover
+      color: map-get($light-theme, 'link');
+    }
+
+    // Dark theme logo
+    [data-theme='dark'] & {
+      color: map-get($dark-theme, 'text-primary');
+      
+      &:hover {
+        color: map-get($dark-theme, 'link');
+      }
     }
   }
 
@@ -34,7 +56,7 @@
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 2rem; // more spacing between links
+      gap: $spacing-6;
       align-items: center;
     }
 
@@ -43,23 +65,38 @@
     }
 
     .navLink {
-      color: #bbb;
+      color: map-get($light-theme, 'text-secondary');
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 6px;
-      transition: color 0.3s ease, background-color 0.3s ease;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-base;
+      padding: $spacing-2 $spacing-3;
+      border-radius: $border-radius;
+      transition: $transition-colors;
 
       &:hover {
-        color: white;
-        background-color: rgba(255, 255, 255, 0.1); // subtle highlight
+        color: map-get($light-theme, 'text-primary');
+        background-color: map-get($light-theme, 'bg-secondary');
       }
 
       &.active {
-        color: #58a6ff;
-        font-weight: 700;
-        background-color: rgba(88, 166, 255, 0.15);
+        color: $color-primary;
+        font-weight: $font-weight-semibold;
+        background-color: rgba($color-primary, 0.1);
+      }
+
+      // Dark theme navigation links
+      [data-theme='dark'] & {
+        color: map-get($dark-theme, 'text-secondary');
+        
+        &:hover {
+          color: map-get($dark-theme, 'text-primary');
+          background-color: map-get($dark-theme, 'bg-secondary');
+        }
+
+        &.active {
+          color: $color-primary-light;
+          background-color: rgba($color-primary-light, 0.1);
+        }
       }
     }
 
@@ -68,40 +105,67 @@
     }
   }
 
+  // Controls container for theme toggle and menu button
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
   .menuToggle {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.25rem;
-    position: relative;
-    width: 30px;
-    height: 24px;
+    padding: $spacing-2;
+    border-radius: $border-radius;
+    transition: $transition-all;
+    color: map-get($light-theme, 'text-secondary');
+
+    &:hover {
+      background-color: map-get($light-theme, 'bg-secondary');
+      color: map-get($light-theme, 'text-primary');
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    // Dark theme menu toggle
+    [data-theme='dark'] & {
+      color: map-get($dark-theme, 'text-secondary');
+      
+      &:hover {
+        background-color: map-get($dark-theme, 'bg-secondary');
+        color: map-get($dark-theme, 'text-primary');
+      }
+    }
 
     .hamburger,
     .hamburger::before,
     .hamburger::after {
       content: '';
       display: block;
-      background: white;
-      height: 3px;
-      border-radius: 2px;
+      background: currentColor;
+      height: 2px;
+      border-radius: $border-radius-full;
       position: absolute;
-      width: 100%;
-      transition: transform 0.3s ease;
+      width: 20px;
+      transition: transform $transition-normal;
     }
 
     .hamburger {
       top: 50%;
-      transform: translateY(-50%);
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .hamburger::before {
-      top: 0;
+      top: -6px;
     }
 
     .hamburger::after {
-      bottom: 0;
+      bottom: -6px;
     }
 
     &[aria-expanded='true'] .hamburger {
@@ -109,31 +173,66 @@
     }
 
     &[aria-expanded='true'] .hamburger::before {
-      transform: rotate(45deg);
-      top: 50%;
+      transform: translateY(6px) rotate(45deg);
     }
 
     &[aria-expanded='true'] .hamburger::after {
-      transform: rotate(-45deg);
-      bottom: 50%;
+      transform: translateY(-6px) rotate(-45deg);
     }
   }
 
-  @media (max-width: 768px) {
+  @include breakpoint-max(md) {
+    padding: $spacing-3 $spacing-4;
+    
+    .container {
+      gap: $spacing-4;
+    }
+    
+    .logo {
+      font-size: $font-size-xl;
+    }
+    
     .nav {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: #24292e;
-      width: 220px; // slightly wider
-      padding: 1rem;
-      border-radius: 0 0 0 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      background-color: map-get($light-theme, 'bg-elevated');
+      width: 280px;
+      padding: $spacing-4;
+      border-radius: 0 0 $border-radius-lg $border-radius-lg;
+      box-shadow: $shadow-lg;
+      border: 1px solid map-get($light-theme, 'border-primary');
+      border-top: none;
+
+      // Dark theme mobile navigation
+      [data-theme='dark'] & {
+        background-color: map-get($dark-theme, 'bg-elevated');
+        border-color: map-get($dark-theme, 'border-primary');
+      }
 
       ul {
         flex-direction: column;
-        gap: 1.25rem;
+        gap: $spacing-3;
+      }
+
+      .navLink {
+        display: block;
+        padding: $spacing-3;
+        border-radius: $border-radius;
+        
+        &:hover,
+        &.active {
+          background-color: map-get($light-theme, 'bg-secondary');
+        }
+
+        // Dark theme mobile navigation links
+        [data-theme='dark'] & {
+          &:hover,
+          &.active {
+            background-color: map-get($dark-theme, 'bg-secondary');
+          }
+        }
       }
 
       &.open {
@@ -141,8 +240,14 @@
       }
     }
 
+    .controls {
+      gap: $spacing-3;
+    }
+
     .menuToggle {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

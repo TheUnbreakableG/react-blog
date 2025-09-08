@@ -1,0 +1,209 @@
+@use '@/styles/mixins' as *;
+
+/**
+ * Theme Toggle Styles
+ * Modern, accessible theme toggle switch with smooth transitions
+ * Uses CSS variables for theming and follows design system patterns
+ */
+
+.themeToggle {
+  // Reset button styles
+  background: none;
+  border: none;
+  padding: $spacing-2;
+  border-radius: $border-radius-full;
+  cursor: pointer;
+  transition: $transition-all;
+  position: relative;
+  
+  // Hover and focus states
+  &:hover {
+    background-color: map-get($light-theme, 'bg-secondary');
+  }
+  
+  &:focus-visible {
+    @include focus-ring;
+  }
+  
+  // Dark theme styles
+  [data-theme='dark'] & {
+    &:hover {
+      background-color: map-get($dark-theme, 'bg-secondary');
+    }
+  }
+}
+
+.toggleTrack {
+  // Track styling
+  width: 3rem;
+  height: 1.5rem;
+  background-color: map-get($light-theme, 'bg-tertiary');
+  border-radius: $border-radius-full;
+  position: relative;
+  transition: background-color $transition-normal;
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-1;
+  
+  // Dark theme track
+  [data-theme='dark'] & {
+    background-color: map-get($dark-theme, 'bg-tertiary');
+  }
+}
+
+.toggleThumb {
+  // Thumb container
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform $transition-normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  
+  // Light theme position (left)
+  &[data-theme='light'] {
+    left: 0.25rem;
+    transform: translateY(-50%);
+  }
+  
+  // Dark theme position (right)
+  &[data-theme='dark'] {
+    left: calc(100% - 1.25rem - 0.25rem);
+    transform: translateY(-50%);
+  }
+  
+  // Thumb styling
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $color-white;
+    border-radius: $border-radius-full;
+    box-shadow: $shadow;
+    transition: $transition-all;
+  }
+  
+  // Icons container
+  svg {
+    position: relative;
+    z-index: 1;
+    transition: opacity $transition-fast, transform $transition-normal;
+  }
+}
+
+.sunIcon {
+  // Sun icon styling
+  color: $color-warning;
+  opacity: 1;
+  transform: scale(1);
+  
+  // Hide sun in dark theme
+  [data-theme='dark'] & {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.moonIcon {
+  // Moon icon styling
+  color: $color-gray-400;
+  opacity: 0;
+  transform: scale(0.8);
+  
+  // Show moon in dark theme
+  [data-theme='dark'] & {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Accessibility improvements
+.srOnly {
+  @include sr-only;
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .themeToggle,
+  .toggleTrack,
+  .toggleThumb,
+  .sunIcon,
+  .moonIcon {
+    transition: none;
+  }
+}
+
+// Small screen adjustments
+@include breakpoint-max(sm) {
+  .themeToggle {
+    padding: $spacing-1;
+  }
+  
+  .toggleTrack {
+    width: 2.5rem;
+    height: 1.25rem;
+  }
+  
+  .toggleThumb {
+    width: 1rem;
+    height: 1rem;
+    
+    &[data-theme='light'] {
+      left: 0.2rem;
+    }
+    
+    &[data-theme='dark'] {
+      left: calc(100% - 1rem - 0.2rem);
+    }
+  }
+  
+  .sunIcon,
+  .moonIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// Focus styles for better accessibility
+.themeToggle:focus-visible {
+  .toggleTrack {
+    outline: 2px solid map-get($light-theme, 'border-focus');
+    outline-offset: 2px;
+  }
+  
+  [data-theme='dark'] & .toggleTrack {
+    outline-color: map-get($dark-theme, 'border-focus');
+  }
+}
+
+// Hover effects for better UX
+.themeToggle:hover {
+  .toggleThumb::before {
+    box-shadow: $shadow-md;
+  }
+  
+  .sunIcon {
+    color: darken($color-warning, 10%);
+  }
+  
+  .moonIcon {
+    color: $color-gray-300;
+  }
+  
+  [data-theme='dark'] & .moonIcon {
+    color: $color-gray-100;
+  }
+}
+
+// Active state for click feedback
+.themeToggle:active {
+  transform: scale(0.95);
+  
+  .toggleThumb::before {
+    box-shadow: $shadow-sm;
+  }
+}

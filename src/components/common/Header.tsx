@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import styles from './Header.module.scss';
+import ThemeToggle from './ThemeToggle';
 
 const navItems = [
   { name: 'Home', path: '/' },
@@ -45,15 +46,19 @@ const Header: React.FC = () => {
           </ul>
         </nav>
 
-        <button
-          className={styles.menuToggle}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          onClick={toggleMenu}
-          type="button"
-        >
-          <span className={styles.hamburger} />
-        </button>
+        <div className={styles.controls}>
+          <ThemeToggle />
+          
+          <button
+            className={styles.menuToggle}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            onClick={toggleMenu}
+            type="button"
+          >
+            <span className={styles.hamburger} />
+          </button>
+        </div>
       </div>
     </header>
   );

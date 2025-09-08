@@ -1,366 +1,548 @@
+
+@use '@styles/_variables' as vars;
+
 /**
- * SCSS Mixins
- * Reusable mixins for common patterns and responsive design
+ * SCSS Mixins & Functions
+ * Reusable mixins and functions for consistent styling patterns
+ * These help maintain design consistency and reduce code duplication
  */
 
-// ============================================================================
-// RESPONSIVE BREAKPOINTS
-// ============================================================================
 
-@mixin mobile-only {
-  @media (max-width: #{$breakpoint-sm - 1px}) {
-    @content;
+/* ==========================================================================
+   RESPONSIVE BREAKPOINT MIXINS
+   ========================================================================== */
+
+/**
+ * Breakpoint mixins for responsive design
+ * Uses mobile-first approach with min-width media queries
+ */
+
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: #{vars.$breakpoint-xs}) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: #{vars.$breakpoint-sm}) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: #{vars.$breakpoint-md}) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: #{vars.$breakpoint-lg}) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: #{vars.$breakpoint-xl}) { @content; }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: #{vars.$breakpoint-2xl}) { @content; }
+  } @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg, xl, 2xl";
   }
 }
 
-@mixin tablet-up {
-  @media (min-width: $breakpoint-sm) {
-    @content;
+/**
+ * Max-width breakpoint mixins for targeting specific screen sizes
+ */
+
+@mixin breakpoint-max($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: #{vars.$breakpoint-xs - 1px}) { @content; }
+  } @else if $breakpoint == sm {
+    @media (max-width: #{vars.$breakpoint-sm - 1px}) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: #{vars.$breakpoint-md - 1px}) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: #{vars.$breakpoint-lg - 1px}) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: #{vars.$breakpoint-xl - 1px}) { @content; }
+  } @else {
+    @warn "Breakpoint-max mixin supports: xs, sm, md, lg, xl";
   }
 }
 
-@mixin tablet-only {
-  @media (min-width: $breakpoint-sm) and (max-width: #{$breakpoint-lg - 1px}) {
-    @content;
-  }
+/**
+ * Range breakpoint for targeting between two screen sizes
+ */
+
+@mixin breakpoint-between($min, $max) {
+  @media (min-width: #{$min}) and (max-width: #{$max - 1px}) { @content; }
 }
 
-@mixin desktop-up {
-  @media (min-width: $breakpoint-lg) {
-    @content;
-  }
-}
+/* ==========================================================================
+   TYPOGRAPHY MIXINS
+   ========================================================================== */
 
-@mixin desktop-only {
-  @media (min-width: $breakpoint-lg) and (max-width: #{$breakpoint-xl - 1px}) {
-    @content;
-  }
-}
-
-@mixin large-desktop-up {
-  @media (min-width: $breakpoint-xl) {
-    @content;
-  }
-}
-
-@mixin extra-large-desktop-up {
-  @media (min-width: $breakpoint-2xl) {
-    @content;
-  }
-}
-
-// Custom breakpoint mixin
-@mixin breakpoint($size) {
-  @media (min-width: $size) {
-    @content;
-  }
-}
-
-// ============================================================================
-// CONTAINER & LAYOUT
-// ============================================================================
-
-@mixin container($max-width: $content-width) {
-  width: 100%;
-  max-width: $max-width;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: $spacing-4;
-  padding-right: $spacing-4;
-
-  @include tablet-up {
-    padding-left: $spacing-6;
-    padding-right: $spacing-6;
-  }
-
-  @include desktop-up {
-    padding-left: $spacing-8;
-    padding-right: $spacing-8;
-  }
-}
-
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-@mixin grid-center {
-  display: grid;
-  place-items: center;
-}
-
-// ============================================================================
-// TYPOGRAPHY
-// ============================================================================
+/**
+ * Typography mixins for consistent text styling
+ * Ensures proper font scaling and spacing
+ */
 
 @mixin heading-1 {
-  font-size: $font-size-3xl;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-tight;
-  letter-spacing: -0.025em;
-
-  @include tablet-up {
-    font-size: $font-size-4xl;
+  font-family: vars.$font-secondary;
+  font-size: vars.$font-size-4xl;
+  font-weight: vars.$font-weight-bold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-6;
+  
+  @include breakpoint(md) {
+    font-size: vars.$font-size-5xl;
   }
-
-  @include desktop-up {
-    font-size: $font-size-5xl;
+  
+  @include breakpoint(lg) {
+    font-size: vars.$font-size-6xl;
   }
 }
 
 @mixin heading-2 {
-  font-size: $font-size-2xl;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-tight;
-  letter-spacing: -0.025em;
-
-  @include tablet-up {
-    font-size: $font-size-3xl;
-  }
-
-  @include desktop-up {
-    font-size: $font-size-4xl;
+  font-family: vars.$font-secondary;
+  font-size: vars.$font-size-3xl;
+  font-weight: vars.$font-weight-bold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-5;
+  
+  @include breakpoint(md) {
+    font-size: vars.$font-size-4xl;
   }
 }
 
 @mixin heading-3 {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  line-height: $line-height-tight;
-
-  @include tablet-up {
-    font-size: $font-size-2xl;
-  }
-
-  @include desktop-up {
-    font-size: $font-size-3xl;
+  font-family: vars.$font-secondary;
+  font-size: vars.$font-size-2xl;
+  font-weight: vars.$font-weight-bold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-4;
+  
+  @include breakpoint(md) {
+    font-size: vars.$font-size-3xl;
   }
 }
 
 @mixin heading-4 {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
-  line-height: $line-height-tight;
+  font-family: vars.$font-secondary;
+  font-size: vars.$font-size-xl;
+  font-weight: vars.$font-weight-semibold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-3;
+}
 
-  @include tablet-up {
-    font-size: $font-size-xl;
-  }
+@mixin heading-5 {
+  font-family: vars.$font-secondary;
+  font-size: vars.$font-size-lg;
+  font-weight: vars.$font-weight-semibold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-2;
+}
+
+@mixin heading-6 {
+  font-family: vars.$font-secondary;
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-semibold;
+  line-height: vars.$line-height-tight;
+  margin-bottom: vars.$spacing-2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 @mixin body-large {
-  font-size: $font-size-lg;
-  line-height: $line-height-relaxed;
+  font-size: vars.$font-size-lg;
+  line-height: vars.$line-height-relaxed;
+  margin-bottom: vars.$spacing-4;
 }
 
-@mixin body-normal {
-  font-size: $font-size-base;
-  line-height: $line-height-normal;
+@mixin body-regular {
+  font-size: vars.$font-size-base;
+  line-height: vars.$line-height-normal;
+  margin-bottom: vars.$spacing-4;
 }
 
 @mixin body-small {
-  font-size: $font-size-sm;
-  line-height: $line-height-normal;
+  font-size: vars.$font-size-sm;
+  line-height: vars.$line-height-normal;
+  margin-bottom: vars.$spacing-3;
 }
 
-@mixin text-truncate {
+@mixin caption {
+  font-size: vars.$font-size-xs;
+  line-height: vars.$line-height-normal;
+  color: map-get(vars.$light-theme, 'text-tertiary');
+  margin-bottom: vars.$spacing-2;
+}
+
+/* ==========================================================================
+   LAYOUT & SPACING MIXINS
+   ========================================================================== */
+
+/**
+ * Layout mixins for consistent spacing and positioning
+ */
+
+@mixin container {
+  width: 100%;
+  max-width: vars.$content-width;
+  margin: 0 auto;
+  padding: 0 vars.$spacing-4;
+  
+  @include breakpoint(md) {
+    padding: 0 vars.$spacing-6;
+  }
+  
+  @include breakpoint(lg) {
+    padding: 0 vars.$spacing-8;
+  }
+}
+
+@mixin container-wide {
+  @include container;
+  max-width: vars.$content-width-wide;
+}
+
+@mixin container-full {
+  @include container;
+  max-width: vars.$content-width-full;
+}
+
+@mixin section-spacing {
+  padding: vars.$spacing-8 0;
+  
+  @include breakpoint(md) {
+    padding: vars.$spacing-12 0;
+  }
+  
+  @include breakpoint(lg) {
+    padding: vars.$spacing-16 0;
+  }
+}
+
+@mixin card {
+  background-color: map-get(vars.$light-theme, 'bg-elevated');
+  border-radius: vars.$border-radius-lg;
+  border: 1px solid map-get(vars.$light-theme, 'border-primary');
+  box-shadow: vars.$shadow-sm;
+  transition: vars.$transition-all;
+  
+  &:hover {
+    box-shadow: vars.$shadow;
+  }
+  
+  [data-theme='dark'] & {
+    background-color: map-get(vars.$dark-theme, 'bg-elevated');
+    border-color: map-get(vars.$dark-theme, 'border-primary');
+  }
+}
+
+/* ==========================================================================
+   INTERACTIVE ELEMENT MIXINS
+   ========================================================================== */
+
+/**
+ * Mixins for buttons, links, and other interactive elements
+ */
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: vars.$spacing-2;
+  font-family: vars.$font-primary;
+  font-weight: vars.$font-weight-medium;
+  text-decoration: none;
+  border: none;
+  border-radius: vars.$border-radius;
+  cursor: pointer;
+  transition: vars.$transition-all;
+  user-select: none;
+  white-space: nowrap;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid map-get(vars.$light-theme, 'border-focus');
+    outline-offset: 2px;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: vars.$color-primary;
+  color: vars.$color-white;
+  padding: vars.$spacing-2 vars.$spacing-4;
+  
+  &:hover:not(:disabled) {
+    background-color: vars.$color-primary-dark;
+  }
+  
+  &:active:not(:disabled) {
+    background-color: vars.$color-primary-darker;
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: map-get(vars.$light-theme, 'bg-secondary');
+  color: map-get(vars.$light-theme, 'text-primary');
+  border: 1px solid map-get(vars.$light-theme, 'border-primary');
+  padding: vars.$spacing-2 vars.$spacing-4;
+  
+  &:hover:not(:disabled) {
+    background-color: map-get(vars.$light-theme, 'bg-tertiary');
+  }
+  
+  [data-theme='dark'] & {
+    background-color: map-get(vars.$dark-theme, 'bg-secondary');
+    color: map-get(vars.$dark-theme, 'text-primary');
+    border-color: map-get(vars.$dark-theme, 'border-primary');
+    
+    &:hover:not(:disabled) {
+      background-color: map-get(vars.$dark-theme, 'bg-tertiary');
+    }
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background-color: transparent;
+  color: map-get(vars.$light-theme, 'text-primary');
+  padding: vars.$spacing-2 vars.$spacing-4;
+  
+  &:hover:not(:disabled) {
+    background-color: map-get(vars.$light-theme, 'bg-secondary');
+  }
+  
+  [data-theme='dark'] & {
+    color: map-get(vars.$dark-theme, 'text-primary');
+    
+    &:hover:not(:disabled) {
+      background-color: map-get(vars.$dark-theme, 'bg-secondary');
+    }
+  }
+}
+
+@mixin link {
+  color: map-get(vars.$light-theme, 'link');
+  text-decoration: none;
+  transition: color vars.$transition-fast;
+  
+  &:hover {
+    color: map-get(vars.$light-theme, 'link-hover');
+  }
+  
+  [data-theme='dark'] & {
+    color: map-get(vars.$dark-theme, 'link');
+    
+    &:hover {
+      color: map-get(vars.$dark-theme, 'link-hover');
+    }
+  }
+}
+
+/* ==========================================================================
+   FORM ELEMENT MIXINS
+   ========================================================================== */
+
+/**
+ * Mixins for form inputs, labels, and validation states
+ */
+
+@mixin input-base {
+  width: 100%;
+  font-family: vars.$font-primary;
+  font-size: vars.$font-size-base;
+  padding: vars.$spacing-3 vars.$spacing-4;
+  border: 1px solid map-get(vars.$light-theme, 'border-primary');
+  border-radius: vars.$border-radius;
+  background-color: map-get(vars.$light-theme, 'bg-primary');
+  color: map-get(vars.$light-theme, 'text-primary');
+  transition: vars.$transition-all;
+  
+  &:focus {
+    outline: none;
+    border-color: map-get(vars.$light-theme, 'border-focus');
+    box-shadow: 0 0 0 3px rgba(map-get(vars.$light-theme, 'border-focus'), 0.1);
+  }
+  
+  &::placeholder {
+    color: map-get(vars.$light-theme, 'text-tertiary');
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  [data-theme='dark'] & {
+    background-color: map-get(vars.$dark-theme, 'bg-primary');
+    color: map-get(vars.$dark-theme, 'text-primary');
+    border-color: map-get(vars.$dark-theme, 'border-primary');
+    
+    &:focus {
+      border-color: map-get(vars.$dark-theme, 'border-focus');
+      box-shadow: 0 0 0 3px rgba(map-get(vars.$dark-theme, 'border-focus'), 0.1);
+    }
+    
+    &::placeholder {
+      color: map-get(vars.$dark-theme, 'text-tertiary');
+    }
+  }
+}
+
+@mixin label {
+  display: block;
+  font-size: vars.$font-size-sm;
+  font-weight: vars.$font-weight-medium;
+  color: map-get(vars.$light-theme, 'text-secondary');
+  margin-bottom: vars.$spacing-2;
+  
+  [data-theme='dark'] & {
+    color: map-get(vars.$dark-theme, 'text-secondary');
+  }
+}
+
+@mixin form-error {
+  font-size: vars.$font-size-sm;
+  color: vars.$color-error;
+  margin-top: vars.$spacing-1;
+}
+
+/* ==========================================================================
+   UTILITY MIXINS
+   ========================================================================== */
+
+/**
+ * Utility mixins for common styling patterns
+ */
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin focus-ring {
+  outline: 2px solid map-get(vars.$light-theme, 'border-focus');
+  outline-offset: 2px;
+  border-radius: vars.$border-radius;
+  
+  [data-theme='dark'] & {
+    outline-color: map-get(vars.$dark-theme, 'border-focus');
+  }
+}
+
+@mixin truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-@mixin text-truncate-lines($lines: 2) {
+@mixin line-clamp($lines) {
   display: -webkit-box;
   -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-// ============================================================================
-// BUTTONS & INTERACTIONS
-// ============================================================================
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-@mixin button-base {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: $border-radius-md;
-  font-weight: $font-weight-medium;
-  text-decoration: none;
-  transition: $transition-colors;
-  cursor: pointer;
-  user-select: none;
-  
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
+/* ==========================================================================
+   ANIMATION MIXINS
+   ========================================================================== */
+
+/**
+ * Animation and transition mixins for smooth interactions
+ */
+
+@mixin fade-in {
+  animation: fadeIn vars.$transition-normal;
+}
+
+@mixin slide-up {
+  animation: slideUp vars.$transition-normal;
+}
+
+@mixin scale-up {
+  animation: scaleUp vars.$transition-normal;
+}
+
+@mixin pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  &:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+  to {
+    opacity: 1;
   }
 }
 
-@mixin button-size-sm {
-  padding: $spacing-2 $spacing-3;
-  font-size: $font-size-sm;
-  gap: $spacing-1;
-}
-
-@mixin button-size-md {
-  padding: $spacing-3 $spacing-4;
-  font-size: $font-size-base;
-  gap: $spacing-2;
-}
-
-@mixin button-size-lg {
-  padding: $spacing-4 $spacing-6;
-  font-size: $font-size-lg;
-  gap: $spacing-2;
-}
-
-@mixin hover-lift {
-  transition: $transition-transform;
-  
-  &:hover {
-    transform: translateY(-2px);
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(vars.$spacing-4);
   }
-  
-  &:active {
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
-// ============================================================================
-// CARDS & SURFACES
-// ============================================================================
-
-@mixin card {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-primary);
-  border-radius: $border-radius-lg;
-  padding: $spacing-6;
-  box-shadow: $shadow-sm;
-  transition: $transition-all;
-}
-
-@mixin card-hover {
-  &:hover {
-    box-shadow: $shadow-md;
-    transform: translateY(-2px);
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-@mixin surface-elevated {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-primary);
-  box-shadow: $shadow;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
-// ============================================================================
-// FORM ELEMENTS
-// ============================================================================
+/* ==========================================================================
+   DARK THEME MIXINS
+   ========================================================================== */
 
-@mixin input-base {
-  width: 100%;
-  padding: $spacing-3 $spacing-4;
-  border: 1px solid var(--color-border-primary);
-  border-radius: $border-radius;
-  font-size: $font-size-base;
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  transition: $transition-colors;
-  
-  &::placeholder {
-    color: var(--color-text-tertiary);
-  }
-  
-  &:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
-  }
-  
-  &:disabled {
-    background: var(--color-bg-secondary);
-    color: var(--color-text-tertiary);
-    cursor: not-allowed;
-  }
-  
-  &.error {
-    border-color: $color-error;
-    
-    &:focus {
-      box-shadow: 0 0 0 3px rgb(239 68 68 / 0.1);
+/**
+ * Mixins for handling dark theme variations
+ */
+
+@mixin dark-theme {
+  @media (prefers-color-scheme: dark) {
+    &:not([data-theme='light']) {
+      @content;
     }
   }
-}
-
-// ============================================================================
-// ANIMATIONS
-// ============================================================================
-
-@mixin fade-in($duration: $transition-normal) {
-  animation: fadeIn $duration ease-out;
-}
-
-@mixin slide-up($duration: $transition-normal) {
-  animation: slideUp $duration ease-out;
-}
-
-@mixin pulse($duration: 2s) {
-  animation: pulse $duration ease-in-out infinite;
-}
-
-// ============================================================================
-// UTILITIES
-// ============================================================================
-
-@mixin visually-hidden {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
-
-@mixin focus-ring {
-  &:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+  
+  [data-theme='dark'] & {
+    @content;
   }
 }
 
-@mixin loading-skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-bg-secondary) 25%,
-    var(--color-bg-tertiary) 50%,
-    var(--color-bg-secondary) 75%
-  );
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-}
-
-// ============================================================================
-// PRINT STYLES
-// ============================================================================
-
-@mixin print-hidden {
-  @media print {
-    display: none !important;
+@mixin light-theme {
+  @media (prefers-color-scheme: light) {
+    &:not([data-theme='dark']) {
+      @content;
+    }
+  }
+  
+  [data-theme='light'] & {
+    @content;
   }
 }

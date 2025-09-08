@@ -1,0 +1,143 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Getting Started with React and TypeScript",
+      "slug": "getting-started-with-react-typescript",
+      "excerpt": "Learn how to set up a modern React project with TypeScript, Vite, and best practices for development.",
+      "content": "In this comprehensive guide, we'll walk through setting up a modern React project with TypeScript using Vite as our build tool. We'll cover everything from initial setup to production deployment.",
+      "coverImage": "/images/posts/react-typescript-setup.jpg",
+      "publishedAt": "2025-09-01T10:00:00Z",
+      "updatedAt": "2025-09-05T14:30:00Z",
+      "author": "john-doe",
+      "categories": ["react", "typescript", "tutorial"],
+      "tags": ["react", "typescript", "vite", "beginners"],
+      "featured": true,
+      "readingTime": 8,
+      "status": "published",
+      "seo": {
+        "title": "Getting Started with React and TypeScript - Complete Guide",
+        "description": "Step-by-step tutorial on setting up React with TypeScript using Vite. Learn best practices and modern development workflows.",
+        "keywords": ["react", "typescript", "vite", "tutorial", "beginners"],
+        "ogImage": "/images/og/react-typescript.jpg",
+        "ogType": "article",
+        "canonicalUrl": "/blog/getting-started-with-react-typescript"
+      }
+    },
+    {
+      "id": "2",
+      "title": "Building a Modern Blog with Next.js",
+      "slug": "modern-blog-nextjs",
+      "excerpt": "Discover how to build a high-performance blog using Next.js, MDX, and modern web technologies.",
+      "content": "Next.js provides an excellent foundation for building modern blogs with features like SSG, ISR, and excellent SEO capabilities. In this post, we'll explore how to leverage these features.",
+      "coverImage": "/images/posts/nextjs-blog.jpg",
+      "publishedAt": "2025-09-03T15:00:00Z",
+      "author": "sarah-williams",
+      "categories": ["nextjs", "blog", "web-development"],
+      "tags": ["nextjs", "mdx", "ssg", "seo"],
+      "featured": true,
+      "readingTime": 12,
+      "status": "published",
+      "seo": {
+        "title": "Building a Modern Blog with Next.js - Best Practices",
+        "description": "Learn how to build a high-performance blog using Next.js, MDX, and modern web development techniques.",
+        "keywords": ["nextjs", "blog", "mdx", "ssg", "seo"],
+        "ogImage": "/images/og/nextjs-blog.jpg",
+        "ogType": "article"
+      }
+    },
+    {
+      "id": "3",
+      "title": "CSS-in-JS vs CSS Modules: A Modern Comparison",
+      "slug": "css-in-js-vs-css-modules",
+      "excerpt": "Comparing modern CSS solutions for React applications: CSS-in-JS libraries vs CSS Modules approach.",
+      "content": "The debate between CSS-in-JS and CSS Modules continues to be relevant in modern web development. Let's examine the pros and cons of each approach.",
+      "coverImage": "/images/posts/css-comparison.jpg",
+      "publishedAt": "2025-09-05T09:00:00Z",
+      "author": "mike-chen",
+      "categories": ["css", "react", "styling"],
+      "tags": ["css", "styled-components", "css-modules", "comparison"],
+      "featured": false,
+      "readingTime": 6,
+      "status": "published",
+      "seo": {
+        "title": "CSS-in-JS vs CSS Modules: Comprehensive Comparison 2025",
+        "description": "Detailed comparison of CSS-in-JS libraries and CSS Modules for modern React applications. Performance, developer experience, and best practices.",
+        "keywords": ["css", "styled-components", "css-modules", "react", "comparison"],
+        "ogImage": "/images/og/css-comparison.jpg",
+        "ogType": "article"
+      }
+    },
+    {
+      "id": "4",
+      "title": "State Management in React: Context API vs Redux",
+      "slug": "state-management-react-context-redux",
+      "excerpt": "Exploring state management solutions in React: when to use Context API and when to reach for Redux.",
+      "content": "State management is a crucial aspect of React development. In this post, we'll compare Context API and Redux to help you choose the right solution.",
+      "coverImage": "/images/posts/state-management.jpg",
+      "publishedAt": "2025-09-07T11:00:00Z",
+      "author": "lisa-rodriguez",
+      "categories": ["react", "state-management", "redux"],
+      "tags": ["react", "context-api", "redux", "state-management"],
+      "featured": true,
+      "readingTime": 10,
+      "status": "published",
+      "seo": {
+        "title": "State Management in React: Context API vs Redux Comparison",
+        "description": "Comprehensive guide comparing React Context API and Redux for state management. Learn when to use each approach with practical examples.",
+        "keywords": ["react", "context-api", "redux", "state-management", "comparison"],
+        "ogImage": "/images/og/state-management.jpg",
+        "ogType": "article"
+      }
+    },
+    {
+      "id": "5",
+      "title": "Optimizing React Performance with useMemo and useCallback",
+      "slug": "react-performance-usememo-usecallback",
+      "excerpt": "Learn how to use useMemo and useCallback hooks effectively to optimize your React application performance.",
+      "content": "Performance optimization is key to creating smooth React applications. In this guide, we'll dive deep into useMemo and useCallback hooks.",
+      "coverImage": "/images/posts/react-performance.jpg",
+      "publishedAt": "2025-09-10T14:00:00Z",
+      "author": "david-kim",
+      "categories": ["react", "performance", "optimization"],
+      "tags": ["react", "performance", "usememo", "usecallback", "hooks"],
+      "featured": false,
+      "readingTime": 7,
+      "status": "published",
+      "seo": {
+        "title": "Optimizing React Performance: useMemo and useCallback Guide",
+        "description": "Complete guide to using useMemo and useCallback hooks for React performance optimization. Practical examples and best practices.",
+        "keywords": ["react", "performance", "usememo", "usecallback", "optimization"],
+        "ogImage": "/images/og/react-performance.jpg",
+        "ogType": "article"
+      }
+    },
+    {
+      "id": "6",
+      "title": "Building Accessible React Components",
+      "slug": "accessible-react-components",
+      "excerpt": "Creating accessible React components that work for all users, including those with disabilities.",
+      "content": "Accessibility is not just a nice-to-have feature—it's essential for creating inclusive web applications. Let's explore how to build accessible React components.",
+      "coverImage": "/images/posts/accessibility.jpg",
+      "publishedAt": "2025-09-12T16:00:00Z",
+      "author": "emma-wilson",
+      "categories": ["react", "accessibility", "a11y"],
+      "tags": ["react", "accessibility", "a11y", "inclusive-design"],
+      "featured": false,
+      "readingTime": 9,
+      "status": "published",
+      "seo": {
+        "title": "Building Accessible React Components: Complete Guide",
+        "description": "Learn how to create accessible React components that work for all users. ARIA roles, keyboard navigation, and screen reader compatibility.",
+        "keywords": ["react", "accessibility", "a11y", "aria", "inclusive-design"],
+        "ogImage": "/images/og/accessibility.jpg",
+        "ogType": "article"
+      }
+    }
+  ],
+  "meta": {
+    "totalPosts": 6,
+    "featuredPosts": 3,
+    "lastUpdated": "2025-09-12T16:00:00Z"
+  }
+}

@@ -9,11 +9,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import App from './App';
-// import { ThemeProvider } from '@/context/ThemeContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 // import ScrollToTop from '@/components/common/ScrollToTop';
 
 // Import global styles
-// import '@/styles/globals.scss';
+import '@/styles/globals.scss';
 
 // Get root element with proper error handling
 const rootElement = document.getElementById('root');
@@ -29,12 +29,11 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        {/* TODO: Add ThemeProvider when created */}
-        {/* <ThemeProvider> */}
+        <ThemeProvider>
           {/* TODO: Add ScrollToTop when created */}
           {/* <ScrollToTop /> */}
           <App />
-        {/* </ThemeProvider> */}
+        </ThemeProvider>
       </BrowserRouter>
     </HelmetProvider>
   </React.StrictMode>
